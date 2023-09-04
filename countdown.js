@@ -1,7 +1,7 @@
 
 var block = document.getElementById("block");
 var count = 1;
-var target = 266000
+var target = 270000
 
 function createBlock(text) {
     var newBlock = block.cloneNode(true)
@@ -74,21 +74,6 @@ setInterval(function () {
 }, 500)
 //=========================================================================================================================================================
 
-//var blockNumber;
-
-// setInterval(function () {
-//     fetch('http://localhost:3000/')
-//         .then(function (response) {
-//             return response.text()//.json(); // або response.text(), якщо сервер відповідає текстом
-//         })
-//         .then(function (responseData) {
-//             if (blockNumber != responseData) run(264000 - +responseData.split(",").join(""))
-//             blockNumber = responseData
-//         })
-//         .catch(function (error) {
-//             console.log('Помилка:', error);
-//         });
-// }, 500)
 
 
 
