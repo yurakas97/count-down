@@ -29,6 +29,16 @@ function run(text) {
     }
 };
 
+function formateNumber(number) {
+    var text = number.toString()
+    if (text.length > 3) {
+        text = text.split("");
+        text.splice(-3, 0, " ");
+        text = text.join("");
+    }
+    return text
+}
+
 var blockNumber;
 
 setInterval(function () {
@@ -63,7 +73,7 @@ setInterval(function () {
         .then(result => {
             var blockInfo = parseInt(result.number, 16);
 
-            if (blockNumber != blockInfo) run(target - blockInfo)
+            if (blockNumber != blockInfo) run(formateNumber(target - blockInfo))
             blockNumber = blockInfo
 
         })
