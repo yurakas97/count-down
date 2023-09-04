@@ -1,7 +1,7 @@
 
 var block = document.getElementById("block");
 var count = 1;
-var target = 270000
+var target = 300000
 
 function createBlock(text) {
     var newBlock = block.cloneNode(true)
