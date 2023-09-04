@@ -1,18 +1,92 @@
 body {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 2500px;
     background-color: black;
     text-align: center;
     overflow: hidden;
     color: white;
-    background-image: url(back.png);
+    background-image: url(matterials/back.png);
     background-size: cover;
     background-position: 0 300px;
     /* background-repeat: no-repeat; */
     font-family: 'Kanit', sans-serif;
 }
 
+#header {
+    height: 70px;
+    width: 100%;
+    position: relative;
+    top: 0;
+    /* outline: red solid 2px; */
+    /* margin-bottom: 90px; */
+}
+
+#logo {
+    position: absolute;
+    left: 5%;
+    top: 15px;
+}
+
+#explorel {
+    /* color: rgb(203, 203, 203); */
+    opacity: 90%;
+    position: absolute;
+    right: 5%;
+    top: 22px;
+    font-weight: 400;
+}
+
+a:visited {
+    color: white;
+}
+
+a:hover {
+    color: #824ca8;
+    opacity: 80%;
+}
+
+#progress {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 30px;
+    /* outline: 1px solid red; */
+    top: 35%;
+    color: #ffffff84;
+}
+
+#line {
+    position: absolute;
+    /* margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 50%; */
+    /* border: 1px solid rgba(218, 176, 254, 0.537); */
+    background-color: rgba(66, 48, 90, 0.594);
+    border-radius: 5px;
+    top: 40%;
+    left: 5%;
+    right: 5%;
+    bottom: 40%;
+    /* outline: 1px solid red; */
+}
+
+#filled {
+    border-radius: inherit;
+    position: absolute;
+    background-color: #824ca8;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    transition: 1s;
+}
+
 h1 {
     font-size: 200%;
-    margin-top: 50px;
     color: white;
     margin-bottom: 0;
 }
@@ -23,6 +97,8 @@ h2 {
 }
 
 .block {
+    max-width: 300px;
+    min-width: 210px;
     translate: -400% 0;
     margin: auto;
     left: 0;
@@ -31,8 +107,8 @@ h2 {
     padding: 30px;
     border-radius: 10px;
     margin-top: 30px;
-    background-color: rgba(49, 49, 49, 0.422);
-    width: 15%;
+    background-color: rgba(49, 49, 49, 0.568);
+    width: 13%;
     transition: 1s cubic-bezier(.79, .23, .11, .92);
     box-shadow: 2px 6px 10px 1px rgba(153, 0, 255, 0.2);
 }
@@ -61,7 +137,7 @@ h2 {
     translate: 400% 0;
 }
 
-img {
+#block img {
     transition: 2s;
 }
 
