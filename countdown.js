@@ -1,7 +1,9 @@
 
 var block = document.getElementById("block");
 var count = 1;
-var target = 300000
+var target = 300000;
+var blockNumber;
+var progressLine = document.getElementById("filled");
 
 function createBlock(text) {
     var newBlock = block.cloneNode(true)
@@ -37,9 +39,7 @@ function formateNumber(number) {
         text = text.join("");
     }
     return text
-}
-
-var blockNumber;
+};
 
 setInterval(function () {
     // Виклик віддаленого методу за допомогою JSON-RPC
@@ -75,6 +75,7 @@ setInterval(function () {
 
             if (blockNumber != blockInfo) run(formateNumber(target - blockInfo))
             blockNumber = blockInfo
+            progress()
 
         })
         .catch(error => {
@@ -82,11 +83,13 @@ setInterval(function () {
         });
 
 }, 500)
+
 //=========================================================================================================================================================
 
-
-
-
+function progress() {
+    var value = blockNumber / (target / 100);
+    progressLine.style.right = (100 - value) + "%";
+};
 
 
 
