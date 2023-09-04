@@ -1,0 +1,92 @@
+body {
+    background-color: black;
+    text-align: center;
+    overflow: hidden;
+    color: white;
+    background-image: url(matterials/back.png);
+    background-size: cover;
+    background-position: 0 300px;
+    /* background-repeat: no-repeat; */
+    font-family: 'Kanit', sans-serif;
+}
+
+h1 {
+    font-size: 200%;
+    margin-top: 50px;
+    color: white;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-size: 400%;
+    margin-top: 0;
+}
+
+.block {
+    translate: -400% 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+    background-color: rgba(49, 49, 49, 0.422);
+    width: 15%;
+    transition: 1s cubic-bezier(.79, .23, .11, .92);
+    box-shadow: 2px 6px 10px 1px rgba(153, 0, 255, 0.2);
+}
+
+
+#text {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 20px;
+    font-size: 200%;
+    font-weight: 400;
+    background-color: #824ca8;
+    border-radius: 10px;
+}
+
+.left {
+    translate: -400% 0;
+}
+
+.center {
+    translate: 0 0;
+}
+
+.right {
+    translate: 400% 0;
+}
+
+img {
+    transition: 2s;
+}
+
+.up {
+    translate: 0 -20px;
+}
+
+.down {
+    translate: 0 60px;
+}
+
+@keyframes swing {
+    0% {
+        transform: translateY(-10px);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.swinging {
+    animation: swing 3s ease-in-out infinite;
+}
