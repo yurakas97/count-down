@@ -1,7 +1,7 @@
 
 var block = document.getElementById("block");
 var count = 1;
-var target = 300000;
+var target = 397015;
 var blockNumber;
 var progressLine = document.getElementById("filled");
 
@@ -22,8 +22,8 @@ function run(text) {
     createBlock(text)
 
     setTimeout(function () {
+        window["block" + (count - 1)].children[0].classList.add("swinging");
         window["block" + (count - 1)].classList.add("center");
-        window["block" + (count - 1)].children[0].classList.add("swinging")
     }, 10)
 
     if (window["block" + (count - 3)]) {
@@ -41,7 +41,7 @@ function formateNumber(number) {
     return text
 };
 
-setInterval(function () {
+var intervalID = setInterval(function () {
     // Виклик віддаленого методу за допомогою JSON-RPC
     function callRemoteMethod(methodName, params) {
         const url = 'https://rpc-0.gemini-3f.subspace.network/ws'; // Замініть на відповідний URL
@@ -73,10 +73,25 @@ setInterval(function () {
         .then(result => {
             var blockInfo = parseInt(result.number, 16);
 
-            if (blockNumber != blockInfo) run(formateNumber(target - blockInfo))
-            blockNumber = blockInfo
-            progress()
+            if (blockNumber != blockInfo) {
+                run(formateNumber(target - blockInfo))
+                blockNumber = blockInfo
+                progress()
+            }
 
+            if (target - blockNumber <= 0) {
+                clearInterval(intervalID)
+                setTimeout(function () {
+                    var blocks = document.getElementsByClassName("block");
+                    blocks[1].classList.add("right");
+                    setInterval(function () {
+                        document.getElementById("progress").style.marginTop = "150px";
+                        document.getElementById("progress").firstElementChild.style.top = "20%"
+                        document.getElementsByTagName("h2")[0].innerHTML = "INCENTIVIZED";
+                    }, 800)
+
+                }, 4000)
+            }
         })
         .catch(error => {
             console.error('Помилка:', error);
@@ -88,8 +103,26 @@ setInterval(function () {
 
 function progress() {
     var value = blockNumber / (target / 100);
-    progressLine.style.right = (100 - value) + "%";
+    setTimeout(function () {
+        progressLine.style.right = (100 - value) + "%";
+    }, 1000)
+    //progressLine.style.right = (100 - value) + "%";
+}
+
+function smallScreen() {
+    if (window.innerWidth < 800) {
+        document.body.style.backgroundImage = "none";
+        document.body.style.fontSize = "80%"
+    }
 };
+
+smallScreen()
+
+
+
+
+
+
 
 
 
