@@ -87,7 +87,7 @@ var intervalID = setInterval(function () {
                     setInterval(function () {
                         document.getElementById("progress").style.marginTop = "150px";
                         document.getElementById("progress").firstElementChild.style.top = "20%"
-                        document.getElementsByTagName("h2")[0].innerHTML = "INCENTIVIZED";
+                        document.getElementsByTagName("h2")[0].innerHTML = "IS INCENTIVIZED";
                     }, 800)
 
                 }, 4000)
