@@ -1,7 +1,7 @@
 
 var block = document.getElementById("block");
 var count = 1;
-var target = 395000;
+var target = 995000;
 var blockNumber;
 var progressLine = document.getElementById("filled");
 
