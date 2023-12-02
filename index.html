@@ -4,38 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown</title>
-    <link rel="website icon" href="icon.jpg" sizes="64x64">
-    <link rel="stylesheet" href="./style.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
-    </style>
+    <title>British Humor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&family=Kanit:wght@300;400;600&family=Roboto:ital,wght@0,100;0,300;0,500;0,700;0,900;1,300&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <div id="header">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.2.3-dev.f8d8774.0/web3.min.js"
+        integrity="sha512-R8lllVQjPifZGhInwaWKzRGg17jttZjqGDArMC4PexZlS1MjvGo6Y/eaVCeQ+2eKH3KTFjKU57GPCICpqIw8Hw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <a href="https://uk.subspace.network/"><img id="logo" src="logoSub.png" width="200px"></a>
-        <a href="https://subspace.subscan.io/">
-            <div id="explorer">EXPLORER</div>
-        </a>
+    <div class="header">
+        <h1>Simply get a georgeous joke <br>and a lot of funs</h1>
+        <h2>And rise your mood up</h2>
     </div>
-    <div id="progress">
 
-        <div id="line">
+    <div class="button">
+        GET A JOKE
+    </div>
 
-            <div id="filled"></div>
+    <div class="joke-container">
+        <div class="joke-box">
+            <div class="text-setup"></div>
+            <div class="text-punch"></div>
         </div>
     </div>
 
-    <h1>GEMINI 3F</h1>
-    <h2>GETS INCENTIVIZED IN:</h2>
-
-    <div class="block" id="block"><img src="box.png" width="150px">
-        <div id="text">34 767</div>
-    </div>
-
-    <script src="countdown.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
