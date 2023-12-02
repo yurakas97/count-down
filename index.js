@@ -181,6 +181,7 @@ const contract = new web3.eth.Contract(contractABI, contractAddress);
 // Функція для виклику контракту при натисканні на кнопку
 async function payForService() {
     const accounts = await web3.eth.getAccounts();
+    console.log("start")
 
     try {
         const result = await contract.methods.payService().send({
