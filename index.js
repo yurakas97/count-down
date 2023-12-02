@@ -8,7 +8,7 @@ var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
 
 
-//humorButton.addEventListener("click", payForService)
+humorButton.addEventListener("click", payForService)
 
 function getHumor() {
 
