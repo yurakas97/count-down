@@ -8,7 +8,7 @@ var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
 
 
-humorButton.addEventListener("click", payForService)
+//humorButton.addEventListener("click", payForService)
 
 function getHumor() {
 
@@ -181,7 +181,8 @@ const contract = new web3.eth.Contract(contractABI, contractAddress);
 // Функція для виклику контракту при натисканні на кнопку
 async function payForService() {
     const accounts = await web3.eth.getAccounts();
-    console.log("start")
+
+    await checkNetwork();
 
     try {
         const result = await contract.methods.payService().send({
@@ -195,3 +196,67 @@ async function payForService() {
         console.error('Transaction failed:', error.message);
     }
 }
+
+
+// Отримайте інформацію про обрану мережу в MetaMask
+async function getSelectedNetwork() {
+    try {
+        const networkId = await web3.eth.net.getId();
+        return networkId;
+    } catch (error) {
+        console.error('Error getting network ID:', error.message);
+        return null;
+    }
+}
+
+// Перевірте, чи обрана мережа відповідає вашим вимогам
+function checkNetwork() {
+    const requiredNetworkId = 8073763; // ID потрібної мережі (1 для mainnet)
+
+    getSelectedNetwork().then((networkId) => {
+        if (networkId !== null && networkId !== requiredNetworkId) {
+            // Запропонуйте користувачу додати або змінити мережу
+            if (confirm('You are not connected to the required network. Do you want to add or switch?')) {
+                // Отримайте інформацію про мережу для додавання або переключення
+                const networkInfo = {
+                    chainId: `0x${requiredNetworkId.toString(16)}`, // Hex формат ID мережі
+                    chainName: 'yurakas_8073763-1',
+                    nativeCurrency: {
+                        name: 'KAS',
+                        symbol: 'KAS',
+                        decimals: 18,
+                    },
+                    rpcUrls: ['http://46.101.121.126:8545/'], // Замініть на свій Infura Project ID
+                    blockExplorerUrls: [''],
+                };
+
+                // Спробуйте додати мережу
+                window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [networkInfo],
+                }).then(() => {
+                    console.log('Network added successfully');
+                }).catch((error) => {
+                    console.error('Error adding network:', error.message);
+                    // Якщо додавання не вдалося, спробуйте переключити мережу
+                    switchNetwork(networkInfo);
+                });
+            }
+        }
+    });
+}
+
+// Функція для переключення на задану мережу
+function switchNetwork(networkInfo) {
+    window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: networkInfo.chainId }],
+    }).then(() => {
+        console.log('Network switched successfully');
+    }).catch((error) => {
+        console.error('Error switching network:', error.message);
+    });
+}
+
+// Викличте перевірку мережі
+//checkNetwork();
