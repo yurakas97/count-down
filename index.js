@@ -3,6 +3,7 @@ var humorButton = document.querySelector(".button");
 var firstLine = document.getElementsByClassName("text-setup")[0];
 var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
+const requiredNetworkId;
 
 
 humorButton.addEventListener("click", payForService)
@@ -179,7 +180,7 @@ const contract = new web3.eth.Contract(contractABI, contractAddress);
 async function payForService() {
     const accounts = await web3.eth.getAccounts();
 
-    checkNetwork()
+   await checkNetwork()
 
     try {
         const result = await contract.methods.payService().send({
@@ -208,7 +209,7 @@ async function getSelectedNetwork() {
 
 // Перевірте, чи обрана мережа відповідає вашим вимогам
 function checkNetwork() {
-    const requiredNetworkId = 8073763; // ID потрібної мережі (1 для mainnet)
+    requiredNetworkId = 8073763; // ID потрібної мережі (1 для mainnet)
 
     // Спробуйте переключитись на потрібну мережу
     switchToRequiredNetwork(requiredNetworkId).then((success) => {
@@ -217,6 +218,7 @@ function checkNetwork() {
             addAndSwitchToNetwork(requiredNetworkId);
         }
     });
+    return true
 }
 
 // Функція для переключення на задану мережу
