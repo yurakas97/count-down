@@ -3,7 +3,7 @@ var humorButton = document.querySelector(".button");
 var firstLine = document.getElementsByClassName("text-setup")[0];
 var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
-const requiredNetworkId;
+var requiredNetworkId;
 
 
 humorButton.addEventListener("click", payForService)
