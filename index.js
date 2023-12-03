@@ -1,12 +1,19 @@
 
 var humorButton = document.querySelector(".button");
+var connectButton = document.querySelector(".wallet-conect");
 var firstLine = document.getElementsByClassName("text-setup")[0];
 var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
 var requiredNetworkId;
+let web3;
+var isWalletConnected = false;
 
 
-humorButton.addEventListener("click", payForService)
+
+humorButton.addEventListener("click", function() {
+    if (isWalletConnected) payForService()
+})
+connectButton.addEventListener("click",walletConnect)
 
 function getHumor() {
 
@@ -45,18 +52,18 @@ function getHumor() {
     return
 }
 
+function walletConnect() {
+    if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
+        // Використання MetaMask провайдера
+        web3 = new Web3(window.ethereum);
+        // Запит на підключення акаунта MetaMask
+        window.ethereum.enable();
+        
+    } else {
+        console.error('MetaMask not detected');
+    }
 
-// Підключення бібліотеки Web3.js, якщо вона встановлена локально через npm
-
-// Перевірка наявності Web3
-let web3;
-if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-    // Використання MetaMask провайдера
-    web3 = new Web3(window.ethereum);
-    // Запит на підключення акаунта MetaMask
-    window.ethereum.enable();
-} else {
-    console.error('MetaMask not detected');
+    checkNetwork()
 }
 
 
@@ -180,8 +187,6 @@ const contract = new web3.eth.Contract(contractABI, contractAddress);
 async function payForService() {
     const accounts = await web3.eth.getAccounts();
 
-   await checkNetwork()
-
     try {
         const result = await contract.methods.payService().send({
             from: accounts[0],
@@ -209,7 +214,7 @@ async function getSelectedNetwork() {
 
 // Перевірте, чи обрана мережа відповідає вашим вимогам
 function checkNetwork() {
-    requiredNetworkId = 8073763; // ID потрібної мережі (1 для mainnet)
+    const requiredNetworkId = 8073763; // ID потрібної мережі (1 для mainnet)
 
     // Спробуйте переключитись на потрібну мережу
     switchToRequiredNetwork(requiredNetworkId).then((success) => {
