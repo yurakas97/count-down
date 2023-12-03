@@ -51,3 +51,29 @@ body {
     text-align: center;
     margin-top: 50px;
 }
+
+.wallet-conect {
+    color: rgb(255, 255, 255);
+    border: 2px solid white;
+    border-radius: 15px;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.wallet-conect:hover {
+    border-color: rgb(148, 206, 0);
+}
+
+.wallet-network {
+    background-color: rgb(255, 255, 255);
+    color: rgb(36, 36, 36);
+    border-radius: 15px;
+    position: absolute;
+    top: 10px;
+    right: 250px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
