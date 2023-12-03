@@ -8,7 +8,7 @@ var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
 
 
-humorButton.addEventListener("click", payForService)
+//humorButton.addEventListener("click", payForService)
 
 function getHumor() {
 
@@ -182,7 +182,7 @@ const contract = new web3.eth.Contract(contractABI, contractAddress);
 async function payForService() {
     const accounts = await web3.eth.getAccounts();
 
-    await checkNetwork();
+    checkNetwork()
 
     try {
         const result = await contract.methods.payService().send({
@@ -213,48 +213,64 @@ async function getSelectedNetwork() {
 function checkNetwork() {
     const requiredNetworkId = 8073763; // ID потрібної мережі (1 для mainnet)
 
-    getSelectedNetwork().then((networkId) => {
-        if (networkId !== null && networkId !== requiredNetworkId) {
-            // Запропонуйте користувачу додати або змінити мережу
-            if (confirm('You are not connected to the required network. Do you want to add or switch?')) {
-                // Отримайте інформацію про мережу для додавання або переключення
-                const networkInfo = {
-                    chainId: `0x${requiredNetworkId.toString(16)}`, // Hex формат ID мережі
-                    chainName: 'yurakas_8073763-1',
-                    nativeCurrency: {
-                        name: 'KAS',
-                        symbol: 'KAS',
-                        decimals: 18,
-                    },
-                    rpcUrls: ['http://46.101.121.126:8545/'], // Замініть на свій Infura Project ID
-                    blockExplorerUrls: [''],
-                };
-
-                // Спробуйте додати мережу
-                window.ethereum.request({
-                    method: 'wallet_addEthereumChain',
-                    params: [networkInfo],
-                }).then(() => {
-                    console.log('Network added successfully');
-                }).catch((error) => {
-                    console.error('Error adding network:', error.message);
-                    // Якщо додавання не вдалося, спробуйте переключити мережу
-                    switchNetwork(networkInfo);
-                });
-            }
+    // Спробуйте переключитись на потрібну мережу
+    switchToRequiredNetwork(requiredNetworkId).then((success) => {
+        if (!success) {
+            // Якщо переключення не вдалося, спробуйте додати мережу
+            addAndSwitchToNetwork(requiredNetworkId);
         }
     });
 }
 
 // Функція для переключення на задану мережу
-function switchNetwork(networkInfo) {
+function switchToRequiredNetwork(requiredNetworkId) {
+    return new Promise((resolve) => {
+        getSelectedNetwork().then((networkId) => {
+            if (networkId !== null && networkId !== requiredNetworkId) {
+                // Запит на переключення мережі
+                window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: `0x${requiredNetworkId.toString(16)}` }],
+                }).then(() => {
+                    console.log('Network switched successfully');
+                    resolve(true);
+                }).catch((error) => {
+                    console.error('Error switching network:', error.message);
+                    resolve(false);
+                });
+            } else {
+                // Вже на потрібній мережі
+                resolve(true);
+            }
+        });
+    });
+}
+
+// Функція для додавання та переключення на задану мережу
+function addAndSwitchToNetwork(requiredNetworkId) {
+    // Отримайте інформацію про мережу для додавання та переключення
+    const networkInfo = {
+        chainId: `0x${requiredNetworkId.toString(16)}`, // Hex формат ID мережі
+        chainName: 'yurakas_8073763-1',
+        nativeCurrency: {
+            name: 'KAS',
+            symbol: 'KAS',
+            decimals: 18,
+        },
+        rpcUrls: ['http://46.101.121.126:8545/'], // Замініть на свій Infura Project ID
+        blockExplorerUrls: [''],
+    };
+
+    // Додайте та переключіться на мережу
     window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: networkInfo.chainId }],
+        method: 'wallet_addEthereumChain',
+        params: [networkInfo],
     }).then(() => {
-        console.log('Network switched successfully');
+        console.log('Network added successfully');
+        // Переключення на додану мережу
+        switchToRequiredNetwork(requiredNetworkId);
     }).catch((error) => {
-        console.error('Error switching network:', error.message);
+        console.error('Error adding network:', error.message);
     });
 }
 
