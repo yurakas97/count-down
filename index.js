@@ -8,7 +8,7 @@ var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
 
 
-//humorButton.addEventListener("click", payForService)
+humorButton.addEventListener("click", payForService)
 
 function getHumor() {
 
@@ -182,7 +182,7 @@ const contract = new web3.eth.Contract(contractABI, contractAddress);
 async function payForService() {
     const accounts = await web3.eth.getAccounts();
 
-    checkNetwork()
+    await checkNetwork()
 
     try {
         const result = await contract.methods.payService().send({
