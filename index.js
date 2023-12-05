@@ -285,7 +285,7 @@ function switchToRequiredNetwork(requiredNetworkId) {
 function addAndSwitchToNetwork(requiredNetworkId) {
     // Отримайте інформацію про мережу для додавання та переключення
     const networkInfo = {
-        chainId: `0x${requiredNetworkId.toString(16)}`, // Hex формат ID мережі
+        chainId: `8073763`, // Hex формат ID мережі
         chainName: 'yurakas_8073763-1',
         nativeCurrency: {
             name: 'KAS',
