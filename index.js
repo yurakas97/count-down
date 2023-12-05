@@ -292,7 +292,7 @@ function addAndSwitchToNetwork(requiredNetworkId) {
             symbol: 'KAS',
             decimals: 18,
         },
-        rpcUrls: ['http://46.101.121.126:8545/'], // Замініть на свій Infura Project ID
+        rpcUrls: ['http://159.89.10.148:8545/'], // Замініть на свій Infura Project ID
         blockExplorerUrls: [''],
     };
 
