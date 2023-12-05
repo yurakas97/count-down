@@ -1,71 +1,15 @@
 
 var humorButton = document.querySelector(".button");
 var connectButton = document.querySelector(".wallet-conect");
+var faucetInfo = document.querySelector(".faucet-info");
+var faucetButton = document.querySelector(".faucet");
 var firstLine = document.getElementsByClassName("text-setup")[0];
 var secondLine = document.getElementsByClassName("text-punch")[0];
 var timeOutVar;
 var requiredNetworkId;
 let web3;
 var isWalletConnected = false;
-
-
-
-humorButton.addEventListener("click", function() {
-    if (isWalletConnected) payForService()
-})
-connectButton.addEventListener("click",walletConnect)
-
-function getHumor() {
-
-    firstLine.textContent = "";
-    secondLine.textContent = "";
-    clearTimeout(timeOutVar)
-
-    const apiUrl = 'https://official-joke-api.appspot.com/random_joke';
-
-    // Use the fetch() function to make a GET request to the API
-    fetch(apiUrl)
-        .then(response => {
-            // Check if the response status is OK (200)
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            // Parse the response body as JSON
-            return response.json();
-        })
-        .then(data => {
-
-            firstLine.textContent = data.setup;
-
-            timeOutVar = setTimeout(function () {
-                secondLine.textContent = data.punchline;
-            }, 3000)
-
-            // Do something with the value
-        })
-        .catch(error => {
-            // Handle any errors that occurred during the fetch
-            console.error('There was a problem with the fetch operation:', error);
-        });
-
-
-    return
-}
-
-function walletConnect() {
-    if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-        // Використання MetaMask провайдера
-        web3 = new Web3(window.ethereum);
-        // Запит на підключення акаунта MetaMask
-        window.ethereum.enable();
-        
-    } else {
-        console.error('MetaMask not detected');
-    }
-
-    checkNetwork()
-}
-
+var timer1;
 
 
 // Адреса контракту
@@ -181,7 +125,94 @@ const contractABI = [
         "type": "function"
     }
 ];  // Замініть на ваш ABI
-const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+var contract;
+
+
+
+humorButton.addEventListener("click", function () {
+    if (isWalletConnected) payForService()
+    console.log("joke")
+});
+
+connectButton.addEventListener("click", function () {
+    if (!isWalletConnected) walletConnect()
+    if (isWalletConnected) walletDisconnect()
+});
+
+faucetButton.addEventListener("click", function () {
+    clearTimeout(timer1);
+    faucetInfo.classList.toggle("hidden")
+    timer1 = setTimeout(function () {
+        faucetInfo.classList.add("hidden")
+    }, 12000)
+});
+
+document.addEventListener("click", function (event) {
+    clearTimeout(timer1);
+    if (event.target !== faucetInfo && event.target !== faucetButton) faucetInfo.classList.add("hidden")
+});
+
+function getHumor() {
+
+    firstLine.textContent = "";
+    secondLine.textContent = "";
+    clearTimeout(timeOutVar)
+
+    const apiUrl = 'https://official-joke-api.appspot.com/random_joke';
+
+    // Use the fetch() function to make a GET request to the API
+    fetch(apiUrl)
+        .then(response => {
+            // Check if the response status is OK (200)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parse the response body as JSON
+            return response.json();
+        })
+        .then(data => {
+
+            firstLine.textContent = data.setup;
+
+            timeOutVar = setTimeout(function () {
+                secondLine.textContent = data.punchline;
+            }, 3000)
+
+            // Do something with the value
+        })
+        .catch(error => {
+            // Handle any errors that occurred during the fetch
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+
+    return
+}
+
+function walletDisconnect() {
+
+    connectButton.textContent = "Connect wallet";
+    isWalletConnected = false;
+
+}
+
+async function walletConnect() {
+    console.log("wallet")
+    if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
+        // Використання MetaMask провайдера
+        web3 = await new Web3(window.ethereum);
+        // Запит на підключення акаунта MetaMask
+        await window.ethereum.enable();
+        isWalletConnected = true;
+
+    } else {
+        console.error('MetaMask not detected');
+    }
+    contract = await new web3.eth.Contract(contractABI, contractAddress);
+    checkNetwork()
+    connectButton.textContent = "Disconnect"
+}
 
 // Функція для виклику контракту при натисканні на кнопку
 async function payForService() {
