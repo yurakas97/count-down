@@ -293,7 +293,7 @@ function addAndSwitchToNetwork(requiredNetworkId) {
             decimals: 18,
         },
         rpcUrls: ['https://159.89.10.148:8545/'], // Замініть на свій Infura Project ID
-        //blockExplorerUrls: [''],
+        blockExplorerUrls: null,
     };
 
     // Додайте та переключіться на мережу
