@@ -179,6 +179,7 @@ function getHumor() {
 
             timeOutVar = setTimeout(function () {
                 secondLine.textContent = data.punchline;
+                humorButton.textContent = "ANOTHER ONE";
             }, 3000)
 
             // Do something with the value
