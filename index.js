@@ -5,6 +5,7 @@ var faucetInfo = document.querySelector(".faucet-info");
 var faucetButton = document.querySelector(".faucet");
 var firstLine = document.getElementsByClassName("text-setup")[0];
 var secondLine = document.getElementsByClassName("text-punch")[0];
+var jokeBox = document.getElementsByClassName("joke-box")[0];
 var timeOutVar;
 var requiredNetworkId;
 let web3;
@@ -173,6 +174,7 @@ function getHumor() {
         })
         .then(data => {
 
+            jokeBox.style.boxShadow = "0px 0px 20px 7px rgba(148, 206, 0, 1)";
             firstLine.textContent = data.setup;
 
             timeOutVar = setTimeout(function () {
@@ -292,7 +294,7 @@ function addAndSwitchToNetwork(requiredNetworkId) {
             symbol: 'KAS',
             decimals: 18,
         },
-        rpcUrls: ['https://159.89.10.148:8545/'], // Замініть на свій Infura Project ID
+        rpcUrls: ['http://159.89.10.148:8545/'], // Замініть на свій Infura Project ID
         blockExplorerUrls: null,
     };
 
