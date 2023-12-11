@@ -135,12 +135,12 @@ const contractABI_Nft = "";
 var contract;
 var contractNFT;
 
-nftButton.addEventListener("click", function () {
-    if (nftButton.classList.contains("button-nft__active")) {
-        if (isWalletConnected) mintNft()
-        console.log("nft")
-    }
-});
+// nftButton.addEventListener("click", function () {
+//     if (nftButton.classList.contains("button-nft__active")) {
+//         if (isWalletConnected) mintNft()
+//         console.log("nft")
+//     }
+// });
 
 humorButton.addEventListener("click", function () {
     if (isWalletConnected) payForService()
