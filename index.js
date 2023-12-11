@@ -1,11 +1,13 @@
 
-var humorButton = document.querySelector(".button");
+var humorButton = document.querySelector(".button-joke");
 var connectButton = document.querySelector(".wallet-conect");
 var faucetInfo = document.querySelector(".faucet-info");
 var faucetButton = document.querySelector(".faucet");
 var firstLine = document.getElementsByClassName("text-setup")[0];
 var secondLine = document.getElementsByClassName("text-punch")[0];
 var jokeBox = document.getElementsByClassName("joke-box")[0];
+var nftButton = document.getElementsByClassName("button-nft")[0];
+
 var timeOutVar;
 var requiredNetworkId;
 let web3;
@@ -127,9 +129,18 @@ const contractABI = [
     }
 ];  // Замініть на ваш ABI
 
+const contractAddress_Nft = "";
+const contractABI_Nft = "";
+
 var contract;
+var contractNFT;
 
-
+nftButton.addEventListener("click", function () {
+    if (nftButton.classList.contains("button-nft__active")) {
+        if (isWalletConnected) mintNft()
+        console.log("nft")
+    }
+});
 
 humorButton.addEventListener("click", function () {
     if (isWalletConnected) payForService()
@@ -145,7 +156,7 @@ faucetButton.addEventListener("click", function () {
     clearTimeout(timer1);
     faucetInfo.classList.toggle("hidden")
     timer1 = setTimeout(function () {
-        faucetInfo.classList.add("hidden")
+        faucetInfo.classList.add("hidden");
     }, 12000)
 });
 
@@ -180,6 +191,7 @@ function getHumor() {
             timeOutVar = setTimeout(function () {
                 secondLine.textContent = data.punchline;
                 humorButton.textContent = "ANOTHER ONE";
+                nftButton.classList.add("button-nft__active");
             }, 3000)
 
             // Do something with the value
@@ -194,10 +206,8 @@ function getHumor() {
 }
 
 function walletDisconnect() {
-
     connectButton.textContent = "Connect wallet";
     isWalletConnected = false;
-
 }
 
 async function walletConnect() {
@@ -213,6 +223,7 @@ async function walletConnect() {
         console.error('MetaMask not detected');
     }
     contract = await new web3.eth.Contract(contractABI, contractAddress);
+    //contractNFT = await new web3.eth.Contract(contractABI_Nft, contractAddress_Nft);
     checkNetwork()
     connectButton.textContent = "Disconnect"
 }
@@ -234,6 +245,11 @@ async function payForService() {
     }
 }
 
+async function mintNft() {
+    const accounts = await web3.eth.getAccounts();
+
+    return
+}
 
 // Отримайте інформацію про обрану мережу в MetaMask
 async function getSelectedNetwork() {
@@ -314,3 +330,14 @@ function addAndSwitchToNetwork(requiredNetworkId) {
 
 // Викличте перевірку мережі
 //checkNetwork();
+
+async function checkBalance() {
+
+    contract.methods.getContractBalance().call()
+        .then(balance => {
+            console.log('Баланс контракту:', balance);
+        })
+        .catch(error => {
+            console.error('Помилка:', error);
+        });
+} 
