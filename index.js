@@ -135,12 +135,12 @@ const contractABI_Nft = "";
 var contract;
 var contractNFT;
 
-// nftButton.addEventListener("click", function () {
-//     if (nftButton.classList.contains("button-nft__active")) {
-//         if (isWalletConnected) mintNft()
-//         console.log("nft")
-//     }
-// });
+nftButton.addEventListener("click", function () {
+    if (nftButton.classList.contains("button-nft__active")) {
+        if (isWalletConnected) mintNft()
+        console.log("nft")
+    }
+});
 
 humorButton.addEventListener("click", function () {
     if (isWalletConnected) payForService()
@@ -311,7 +311,7 @@ function addAndSwitchToNetwork(requiredNetworkId) {
             symbol: 'KAS',
             decimals: 18,
         },
-        rpcUrls: ['http://159.89.10.148:8545/'], // Замініть на свій Infura Project ID
+        rpcUrls: ['https://froopyland.dymension.xyz/25/yurakas_8073763-1/evmrpc'], // Замініть на свій Infura Project ID
         blockExplorerUrls: null,
     };
 
@@ -329,7 +329,7 @@ function addAndSwitchToNetwork(requiredNetworkId) {
 }
 
 // Викличте перевірку мережі
-//checkNetwork();
+checkNetwork();
 
 async function checkBalance() {
 
