@@ -247,7 +247,7 @@ async function payForService() {
 
 async function mintNft() {
     const accounts = await web3.eth.getAccounts();
-
+    alert("this feature under development")
     return
 }
 
