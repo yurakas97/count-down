@@ -311,7 +311,7 @@ function addAndSwitchToNetwork(requiredNetworkId) {
             symbol: 'KAS',
             decimals: 18,
         },
-        rpcUrls: ['https://froopyland.dymension.xyz/25/yurakas_8073763-1/evmrpc'], // Замініть на свій Infura Project ID
+        rpcUrls: ['https://froopyland.dymension.xyz/26/yurakas_8073763-1-b/evmrpc'], // Замініть на свій Infura Project ID
         blockExplorerUrls: null,
     };
 
