@@ -15,7 +15,7 @@ var isWalletConnected = false;
 var timer1;
 
 
-// Адреса контракту
+// Адрес контракту
 const contractAddress = '0x5a0c31f5e5cb196b9a71e6250e36030078e2800a';  // Замініть на адресу свого контракту
 // Або використовуйте абстракцію контракту
 const contractABI = [
