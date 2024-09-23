@@ -16,7 +16,7 @@ var timer1;
 
 
 // Адрес контракту
-const contractAddress = '0x5a0c31f5e5cb196b9a71e6250e36030078e2800a';  // Замініть на адресу свого контракту
+const contractAddress = '0xbbbf31ae13920d1276421f7b96cd62856189fe83';  // Замініть на адресу свого контракту
 // Або використовуйте абстракцію контракту
 const contractABI = [
     {
@@ -264,7 +264,7 @@ async function getSelectedNetwork() {
 
 // Перевірте, чи обрана мережа відповідає вашим вимогам
 function checkNetwork() {
-    const requiredNetworkId = 8073763; // ID потрібної мережі (1 для mainnet)
+    const requiredNetworkId = 10151; // ID потрібної мережі (1 для mainnet)
 
     // Спробуйте переключитись на потрібну мережу
     switchToRequiredNetwork(requiredNetworkId).then((success) => {
@@ -305,13 +305,13 @@ function addAndSwitchToNetwork(requiredNetworkId) {
     // Отримайте інформацію про мережу для додавання та переключення
     const networkInfo = {
         chainId: `0x${requiredNetworkId.toString(16)}`, // Hex формат ID мережі
-        chainName: 'yurakas_8073763-1',
+        chainName: 'Killing Joke',
         nativeCurrency: {
-            name: 'KAS',
-            symbol: 'KAS',
+            name: 'JOKE',
+            symbol: 'JOKE',
             decimals: 18,
         },
-        rpcUrls: ['https://froopyland.dymension.xyz/26/yurakas_8073763-1-b/evmrpc'], // Замініть на свій Infura Project ID
+        rpcUrls: ['https://evm.neat-bird-84.telebit.io'], // Замініть на свій Infura Project ID
         blockExplorerUrls: null,
     };
 
