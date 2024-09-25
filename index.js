@@ -225,7 +225,9 @@ async function walletConnect() {
     contract = await new web3.eth.Contract(contractABI, contractAddress);
     //contractNFT = await new web3.eth.Contract(contractABI_Nft, contractAddress_Nft);
     checkNetwork()
-    connectButton.textContent = "Disconnect"
+    const accounts = await web3.eth.getAccounts();
+    let address = accounts[0];
+    connectButton.textContent = `${address.slice(-4).toLowerCase()} | Disconnect`;
 }
 
 // Функція для виклику контракту при натисканні на кнопку
