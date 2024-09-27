@@ -120,14 +120,15 @@ body {
     height: 40px;
     line-height: 40px;
     user-select: none;
+    transition: .2s;
 }
 
 .faucet-info {
     background-color: rgb(121, 121, 121);
     border: 2px solid white;
     position: absolute;
-    width: 700px;
-    height: 140px;
+    width: 400px;
+    height: 60px;
     border-radius: 15px;
     padding-top: 20px;
     line-height: 40px;
@@ -153,4 +154,9 @@ code {
 h1,
 h2 {
     text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.51);
+}
+
+.used {
+    background-color: rgb(148, 206, 0);
+    color: white;
 }
