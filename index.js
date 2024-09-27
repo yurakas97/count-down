@@ -11,6 +11,7 @@ var nftButton = document.getElementsByClassName("button-nft")[0];
 var timeOutVar;
 var requiredNetworkId;
 let web3;
+let accounts;
 var isWalletConnected = false;
 var timer1;
 
@@ -225,7 +226,7 @@ async function walletConnect() {
     contract = await new web3.eth.Contract(contractABI, contractAddress);
     //contractNFT = await new web3.eth.Contract(contractABI_Nft, contractAddress_Nft);
     checkNetwork()
-    const accounts = await web3.eth.getAccounts();
+    accounts = await web3.eth.getAccounts();
     let address = accounts[0];
     connectButton.textContent = `${address.slice(-4).toLowerCase()} | Disconnect`;
 }
