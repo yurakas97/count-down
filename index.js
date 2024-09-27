@@ -130,11 +130,57 @@ const contractABI = [
     }
 ];  // Замініть на ваш ABI
 
+const faucetContractAddress = "0x0b194450cedba2bf5b026d8ae5bdd7c9287cf79d";
+const faucetABI = [
+    {
+        "inputs": [],
+        "name": "amountPerRequest",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "depositTokens",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getCoins",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getFaucetBalance",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+];
+
 const contractAddress_Nft = "";
 const contractABI_Nft = "";
 
 var contract;
 var contractNFT;
+
+
 
 nftButton.addEventListener("click", function () {
     if (nftButton.classList.contains("button-nft__active")) {
@@ -153,12 +199,71 @@ connectButton.addEventListener("click", function () {
     if (isWalletConnected) walletDisconnect()
 });
 
-faucetButton.addEventListener("click", function () {
-    clearTimeout(timer1);
+faucetButton.addEventListener("click", async function () {
+    if (!isWalletConnected) return
+    //clearTimeout(timer1);
     faucetInfo.classList.toggle("hidden")
-    timer1 = setTimeout(function () {
-        faucetInfo.classList.add("hidden");
-    }, 12000)
+    // timer1 = setTimeout(function () {
+    //     faucetInfo.classList.toggle("hidden");
+    // }, 12000)
+
+    const contractAddress = '0x0b194450cedba2bf5b026d8ae5bdd7c9287cf79d'; // Замість надайте адресу вашого контракту
+    const contractABI = [
+        {
+            "inputs": [],
+            "name": "amountPerRequest",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "depositTokens",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getCoins",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getFaucetBalance",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ];
+    const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+    const accounts = await web3.eth.getAccounts();
+    const userAccount = accounts[0];
+
+    try {
+        const tx = await contract.methods.getCoins().send({ from: userAccount });
+        console.log("ok")
+        faucetInfo.classList.toggle("hidden");
+        faucetButton.classList.add("used");
+    } catch (error) {
+        console.log(`not ok -- ${error}`);
+        faucetInfo.classList.toggle("hidden");
+    }
 });
 
 document.addEventListener("click", function (event) {
