@@ -149,6 +149,7 @@ code {
     top: 15px;
     line-height: 40px;
     left: 80px;
+    color: rgb(148, 206, 0);
 }
 
 h1,
@@ -156,7 +157,93 @@ h2 {
     text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.51);
 }
 
+h1 {
+    font-size: 250%;
+}
+
 .used {
     background-color: rgb(148, 206, 0);
     color: white;
+}
+
+.swap-info {
+    /* background-color: black; */
+    position: absolute;
+    display: flex;
+    top: 15px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    /* Вирівнює по горизонталі */
+    align-items: center;
+    /* Вирівнює по вертикалі */
+    right: 0;
+    left: 0;
+    margin: auto;
+    /* Для додаткового центрування */
+}
+
+.swap-container {
+    display: flex;
+    flex-direction: row;
+    /* background-color: aquamarine; */
+    top: 15px;
+    line-height: 40px;
+}
+
+.swap-button {
+    background-color: blue;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.swap-button:hover {
+    background-color: rgb(0, 0, 197);
+}
+
+.swap-text {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ibc-container {
+    display: flex;
+    flex-direction: row;
+    /* background-color: aquamarine; */
+    line-height: 40px;
+    margin-left: 20px;
+}
+
+.ibc-text {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+a {
+    text-decoration: none;
+    /* Видаляє підкреслення */
+    color: inherit;
+    /* Успадковує колір від батьківського елемента */
+    background: none;
+    /* Прибирає фонові стилі (якщо є) */
+    border: none;
+    /* Видаляє будь-які рамки */
+    padding: 0;
+    /* Прибирає відступи */
+    margin: 0;
+    /* Прибирає поля */
+    font-size: inherit;
+    /* Успадковує розмір шрифту */
+    font-weight: inherit;
+    /* Успадковує вагу шрифту */
+    font-family: inherit;
+    /* Успадковує шрифт */
+    line-height: inherit;
+    /* Успадковує міжрядковий інтервал */
+    display: inline;
+    /* Скидає можливий інший display */
 }
