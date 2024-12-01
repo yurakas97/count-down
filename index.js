@@ -17,9 +17,16 @@ var timer1;
 
 
 // Адрес контракту
-const contractAddress = '0xbbbf31ae13920d1276421f7b96cd62856189fe83';  // Замініть на адресу свого контракту
+const contractAddress = '0xa13421d8b256d45210f6359488054fe63624fc13';  // Замініть на адресу свого контракту
 // Або використовуйте абстракцію контракту
 const contractABI = [
+    {
+        "inputs": [],
+        "name": "payService",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
     {
         "inputs": [
             {
@@ -70,6 +77,19 @@ const contractABI = [
         "type": "event"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "withdrawFunds",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "getContractBalance",
         "outputs": [
@@ -97,13 +117,6 @@ const contractABI = [
     },
     {
         "inputs": [],
-        "name": "payService",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "serviceCost",
         "outputs": [
             {
@@ -114,21 +127,8 @@ const contractABI = [
         ],
         "stateMutability": "view",
         "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "withdrawFunds",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
     }
-];  // Замініть на ваш ABI
+] // Замініть на ваш ABI
 
 const faucetContractAddress = "0x0b194450cedba2bf5b026d8ae5bdd7c9287cf79d";
 const faucetABI = [
@@ -366,13 +366,13 @@ async function getSelectedNetwork() {
         return networkId;
     } catch (error) {
         console.error('Error getting network ID:', error.message);
-        return null;
+        return 1;
     }
 }
 
 // Перевірте, чи обрана мережа відповідає вашим вимогам
 function checkNetwork() {
-    const requiredNetworkId = 10151; // ID потрібної мережі (1 для mainnet)
+    const requiredNetworkId = 335727; // ID потрібної мережі (1 для mainnet)
 
     // Спробуйте переключитись на потрібну мережу
     switchToRequiredNetwork(requiredNetworkId).then((success) => {
@@ -413,13 +413,13 @@ function addAndSwitchToNetwork(requiredNetworkId) {
     // Отримайте інформацію про мережу для додавання та переключення
     const networkInfo = {
         chainId: `0x${requiredNetworkId.toString(16)}`, // Hex формат ID мережі
-        chainName: 'Killing Joke',
+        chainName: 'British Humor',
         nativeCurrency: {
-            name: 'JOKE',
-            symbol: 'JOKE',
+            name: 'JKE',
+            symbol: 'JKE',
             decimals: 18,
         },
-        rpcUrls: ['https://evm.neat-bird-84.telebit.io'], // Замініть на свій Infura Project ID
+        rpcUrls: ['https://evm.yurakas97.xyz'], // Замініть на свій Infura Project ID
         blockExplorerUrls: null,
     };
 
