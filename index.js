@@ -343,7 +343,7 @@ async function payForService() {
     try {
         const result = await contract.methods.payService().send({
             from: accounts[0],
-            value: web3.utils.toWei('1', 'ether'), // Замініть на вашу вартість послуги
+            value: web3.utils.toWei('10000', 'ether'), // Замініть на вашу вартість послуги
         });
 
         console.log('Transaction successful:', result);
